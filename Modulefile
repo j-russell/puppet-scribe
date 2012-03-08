@@ -10,37 +10,37 @@ description 'A puppet module to install and configure scribe. This modules assum
 
 The store configuration can be specified using a puppet hash structure:
   $stores = {
-      \'default\' 		 => {
-        \'type\'								 => \'file\',
-        \'target_write_size\' 	 => 20480,
-        \'max_write_interval\' 	 => 1,
-        \'buffer_send_rate\' 		 => 5,
-        \'retry_interval\' 			 => 30,
+      \'default\'      => {
+        \'type\'                 => \'file\',
+        \'target_write_size\'    => 20480,
+        \'max_write_interval\'   => 1,
+        \'buffer_send_rate\'     => 5,
+        \'retry_interval\'       => 30,
         \'retry_interval_range\' => 10,
-        \'fs_type\' 						 => \'std\',
-        \'file_path\' 					 => \'/u01/scribe/logs\',
-        \'base_filename\' 			 => \'thisisoverwritten\',
-        \'add_newlines\' 				 => 0,
-        \'rotate_period\' 			 => \'1m\',
+        \'fs_type\'              => \'std\',
+        \'file_path\'            => \'/u01/scribe/logs\',
+        \'base_filename\'        => \'thisisoverwritten\',
+        \'add_newlines\'         => 0,
+        \'rotate_period\'        => \'1m\',
       },
       \'buffer_store\' => {
-        \'type\' 								 => \'buffer\',
-        \'target_write_size\' 	 => 20480,
-        \'max_write_interval\' 	 => 1,
-        \'buffer_send_rate\' 		 => 5,
-        \'retry_interval\' 			 => 30,
+        \'type\'                 => \'buffer\',
+        \'target_write_size\'    => 20480,
+        \'max_write_interval\'   => 1,
+        \'buffer_send_rate\'     => 5,
+        \'retry_interval\'       => 30,
         \'retry_interval_range\' => 10,
-        \'primary\' 	=> {
-          \'type\' 				=> \'network\',
+        \'primary\'   => {
+          \'type\'        => \'network\',
           \'remote_host\' => \'scribemaster\',
           \'remote_port\' => 1463,
         },
         \'secondary\' => {
-          \'type\' 					=> \'file\',
-          \'fs_type\' 			=> \'std\',
-          \'file_path\' 		=> \'/scribe/buffer\',
+          \'type\'          => \'file\',
+          \'fs_type\'       => \'std\',
+          \'file_path\'     => \'/scribe/buffer\',
           \'base_filename\' => \'thisisoverwritten\',
-          \'max_size\' 			=> 209715200,
+          \'max_size\'      => 209715200,
         }
       }
     })
