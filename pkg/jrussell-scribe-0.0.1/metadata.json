@@ -1,0 +1,34 @@
+{
+  "project_page": "",
+  "description": "A puppet module to install and configure scribe. This modules assumes you have your own scribe rpm built.\n\nThe store configuration can be specified using a puppet hash structure:\n  $stores = {\n      'default' \t\t => {\n        'type'\t\t\t\t\t\t\t\t => 'file',\n        'target_write_size' \t => 20480,\n        'max_write_interval' \t => 1,\n        'buffer_send_rate' \t\t => 5,\n        'retry_interval' \t\t\t => 30,\n        'retry_interval_range' => 10,\n        'fs_type' \t\t\t\t\t\t => 'std',\n        'file_path' \t\t\t\t\t => '/u01/scribe/logs',\n        'base_filename' \t\t\t => 'thisisoverwritten',\n        'add_newlines' \t\t\t\t => 0,\n        'rotate_period' \t\t\t => '1m',\n      },\n      'buffer_store' => {\n        'type' \t\t\t\t\t\t\t\t => 'buffer',\n        'target_write_size' \t => 20480,\n        'max_write_interval' \t => 1,\n        'buffer_send_rate' \t\t => 5,\n        'retry_interval' \t\t\t => 30,\n        'retry_interval_range' => 10,\n        'primary' \t=> {\n          'type' \t\t\t\t=> 'network',\n          'remote_host' => 'scribemaster',\n          'remote_port' => 1463,\n        },\n        'secondary' => {\n          'type' \t\t\t\t\t=> 'file',\n          'fs_type' \t\t\t=> 'std',\n          'file_path' \t\t=> '/scribe/buffer',\n          'base_filename' => 'thisisoverwritten',\n          'max_size' \t\t\t=> 209715200,\n        }\n      }\n    })\n\nor a YAML hash structure:\n  scribe_stores:\n    default: \n      target_write_size: 20480\n      base_filename: thisisoverwritten\n      retry_interval_range: 10\n      buffer_send_rate: 5\n      max_write_interval: 1\n      rotate_period: 1m\n      file_path: /u01/scribe/logs\n      fs_type: std\n      add_newlines: 0\n      type: file\n      retry_interval: 30\n    buffer_store: \n      type: buffer\n      retry_interval: 30\n      target_write_size: 20480\n      buffer_send_rate: 5\n      max_write_interval: 1\n      retry_interval_range: 10\n      primary: \n        remote_host: scribemaster\n        remote_port: 1463\n        type: network\n      secondary:\n        type: file \n        fs_type: std\n        file_path: /scribe/buffer\n        max_size: 209715200\n        base_filename: thisisoverwritten",
+  "source": "",
+  "checksums": {
+    "manifests/data.pp": "945370ae7ea878e5cadb0cf36b3fb0d4",
+    "README": "95d2abc2ed0fa65aa0aea0890f5172d9",
+    "manifests/init.pp": "adc3b5301465e62d656d90d315020c95",
+    "templates/basic.conf.erb": "4685ef493903f44fb5ae97222fb807dc",
+    "tests/init.pp": "7e9da782ef0875b06ef9bb006452ad17",
+    "Modulefile": "e19dac94b553de02fc9dfbc3ffe59823",
+    "spec/spec.opts": "a600ded995d948e393fbe2320ba8e51c",
+    "spec/spec_helper.rb": "ca19ec4f451ebc7fdb035b52eae6e909",
+    "metadata.json": "d34d0b70aba36510fbc2df4e667479ef"
+  },
+  "summary": "Module to manage scribe and related config",
+  "author": "Josh Russell",
+  "dependencies": [
+    {
+      "version_requirement": ">=0.0.1",
+      "name": "puppetlabs/hiera"
+    },
+    {
+      "version_requirement": ">=0.0.1",
+      "name": "puppetlabs/hiera-puppet"
+    }
+  ],
+  "license": "",
+  "version": "0.0.1",
+  "name": "jrussell-scribe",
+  "types": [
+
+  ]
+}
