@@ -65,49 +65,49 @@
   #=== Examples
   #
   #  class { 'scribe':
-  #    $package 									=> 'scribe-server',
-  #    $service 									=> 'scribed',
-  #    $conf_dir 									=> '/etc/scribe',
-  #    $conf_file 								=> 'basic.conf',
-  #    $port 											=> 1463,
-  #    $max_msg_per_second 				=> 0,
-  #    $max_queue_size 						=> 5000000,
-  #    $check_interval 						=> 5,
-  #    $new_thread_per_category 	=> 'yes',
-  #    $num_thrift_server_threads	=> 3,
+  #    $package                   => 'scribe-server',
+  #    $service                   => 'scribed',
+  #    $conf_dir                  => '/etc/scribe',
+  #    $conf_file                 => 'basic.conf',
+  #    $port                      => 1463,
+  #    $max_msg_per_second        => 0,
+  #    $max_queue_size            => 5000000,
+  #    $check_interval            => 5,
+  #    $new_thread_per_category   => 'yes',
+  #    $num_thrift_server_threads => 3,
   #    
   #    $stores = {
-  #      'default' 		 => {
-  #        'type'								 	=> 'file',
-  #        'target_write_size' 	 	=> 20480,
-  #        'max_write_interval'  	=> 1,
-  #        'buffer_send_rate' 	 	=> 5,
-  #        'retry_interval' 		 	=> 30,
+  #      'default'     => {
+  #        'type'                 => 'file',
+  #        'target_write_size'    => 20480,
+  #        'max_write_interval'   => 1,
+  #        'buffer_send_rate'     => 5,
+  #        'retry_interval'       => 30,
   #        'retry_interval_range' => 10,
-  #        'fs_type' 						 	=> 'std',
-  #        'file_path' 					 	=> '/scribe/buffer',
-  #        'base_filename' 			 	=> 'thisisoverwritten',
-  #        'add_newlines' 				=> 0,
-  #        'rotate_period' 			 	=> '1m',
+  #        'fs_type'              => 'std',
+  #        'file_path'            => '/scribe/buffer',
+  #        'base_filename'        => 'thisisoverwritten',
+  #        'add_newlines'         => 0,
+  #        'rotate_period'        => '1m',
   #      },
   #      'buffer_store' => {
-  #        'type' 								=> 'buffer',
-  #        'target_write_size' 	 	=> 20480,
-  #        'max_write_interval' 	=> 1,
-  #        'buffer_send_rate' 		=> 5,
-  #        'retry_interval' 			=> 30,
+  #        'type'                 => 'buffer',
+  #        'target_write_size'    => 20480,
+  #        'max_write_interval'   => 1,
+  #        'buffer_send_rate'     => 5,
+  #        'retry_interval'       => 30,
   #        'retry_interval_range' => 10,
-  #        'primary' 	=> {
-  #          'type' 			 => 'network',
+  #        'primary'  => {
+  #          'type'        => 'network',
   #          'remote_host' => 'scribemaster',
   #          'remote_port' => 1463,
   #        },
   #        'secondary' => {
-  #          'type' 				 => 'file',
-  #          'fs_type' 			 => 'std',
-  #          'file_path' 		 => '/scribe/buffer',
+  #          'type'          => 'file',
+  #          'fs_type'       => 'std',
+  #          'file_path'     => '/scribe/buffer',
   #          'base_filename' => 'thisisoverwritten',
-  #          'max_size' 		 => 209715200,
+  #          'max_size'      => 209715200,
   #        }
   #      }
   #    },
@@ -118,38 +118,38 @@
   #Josh Russell <josh.russell@jumptap.com>
   #
 class scribe (
-	$package									 = $scribe::data::package,
-	$service									 = $scribe::data::service,
-	$conf_dir									 = $scribe::data::conf_dir,
-	$conf_file								 = $scribe::data::conf_file,
-	$port											 = $scribe::data::port,
-	$max_msg_per_second				 = $scribe::data::max_msg_per_second,
-	$max_queue_size 					 = $scribe::data::max_queue_size,
-	$check_interval 					 = $scribe::data::check_interval,
-	$new_thread_per_category 	 = $scribe::data::new_thread_per_category,
-	$num_thrift_server_threads = $scribe::data::num_thrift_server_threads,
-	$stores										 = $scribe::data::stores,
+  $package                   = $scribe::data::package,
+  $service                   = $scribe::data::service,
+  $conf_dir                  = $scribe::data::conf_dir,
+  $conf_file                 = $scribe::data::conf_file,
+  $port                      = $scribe::data::port,
+  $max_msg_per_second        = $scribe::data::max_msg_per_second,
+  $max_queue_size            = $scribe::data::max_queue_size,
+  $check_interval            = $scribe::data::check_interval,
+  $new_thread_per_category   = $scribe::data::new_thread_per_category,
+  $num_thrift_server_threads = $scribe::data::num_thrift_server_threads,
+  $stores                    = $scribe::data::stores,
 ) inherits scribe::data {
 
-	package { $scribe::data::package:
-		ensure => installed,
-	}
-	
-	service { $scribe::data::service:
-		ensure 		=> running,
-		enable 		=> true,
-		hasstatus => true,
-		require 	=> Package[$scribe::data::package],
-	}
+  package { $scribe::data::package:
+    ensure => installed,
+  }
+  
+  service { $scribe::data::service:
+    ensure    => running,
+    enable    => true,
+    hasstatus => true,
+    require   => Package[$scribe::data::package],
+  }
 
-	file { "${scribe::data::conf_dir}/${scribe::data::conf_file}":
-		ensure 	=> file,
-		owner 	=> 'root',
-		group 	=> 'root',
-		mode 		=> '0644',
-		content => template("scribe/${scribe::data::conf_file}.erb"),
-		require => Package[$scribe::data::package],
-		notify 	=> Service[$scribe::data::service],
-	}
+  file { "${scribe::data::conf_dir}/${scribe::data::conf_file}":
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => template("scribe/${scribe::data::conf_file}.erb"),
+    require => Package[$scribe::data::package],
+    notify  => Service[$scribe::data::service],
+  }
 
 }
