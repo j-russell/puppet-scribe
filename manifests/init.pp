@@ -85,7 +85,7 @@
   #        'retry_interval' 		 	=> 30,
   #        'retry_interval_range' => 10,
   #        'fs_type' 						 	=> 'std',
-  #        'file_path' 					 	=> '/u01/scribe/logs',
+  #        'file_path' 					 	=> '/scribe/buffer',
   #        'base_filename' 			 	=> 'thisisoverwritten',
   #        'add_newlines' 				=> 0,
   #        'rotate_period' 			 	=> '1m',
