@@ -121,17 +121,17 @@ class scribe {
 
   include scribe::data
 
-  $package                   = $scribe::data::package,
-  $service                   = $scribe::data::service,
-  $conf_dir                  = $scribe::data::conf_dir,
-  $conf_file                 = $scribe::data::conf_file,
-  $port                      = $scribe::data::port,
-  $max_msg_per_second        = $scribe::data::max_msg_per_second,
-  $max_queue_size            = $scribe::data::max_queue_size,
-  $check_interval            = $scribe::data::check_interval,
-  $new_thread_per_category   = $scribe::data::new_thread_per_category,
-  $num_thrift_server_threads = $scribe::data::num_thrift_server_threads,
-  $stores                    = $scribe::data::stores,
+  $package                   = $scribe::data::package
+  $service                   = $scribe::data::service
+  $conf_dir                  = $scribe::data::conf_dir
+  $conf_file                 = $scribe::data::conf_file
+  $port                      = $scribe::data::port
+  $max_msg_per_second        = $scribe::data::max_msg_per_second
+  $max_queue_size            = $scribe::data::max_queue_size
+  $check_interval            = $scribe::data::check_interval
+  $new_thread_per_category   = $scribe::data::new_thread_per_category
+  $num_thrift_server_threads = $scribe::data::num_thrift_server_threads
+  $stores                    = $scribe::data::stores
 
   package { $scribe::data::package:
     ensure => installed,
