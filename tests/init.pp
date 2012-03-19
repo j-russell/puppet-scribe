@@ -1,1 +1,1 @@
-class { 'scribe': }
+include scribe

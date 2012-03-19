@@ -47,7 +47,7 @@ The store configuration can be specified using a puppet hash structure:
 
 or a YAML hash structure:
   scribe_stores:
-    default: 
+    default:
       target_write_size: 20480
       base_filename: thisisoverwritten
       retry_interval_range: 10
@@ -59,23 +59,23 @@ or a YAML hash structure:
       add_newlines: 0
       type: file
       retry_interval: 30
-    buffer_store: 
+    buffer_store:
       type: buffer
       retry_interval: 30
       target_write_size: 20480
       buffer_send_rate: 5
       max_write_interval: 1
       retry_interval_range: 10
-      primary: 
+      primary:
         remote_host: scribemaster
         remote_port: 1463
         type: network
       secondary:
-        type: file 
+        type: file
         fs_type: std
         file_path: /scribe/buffer
         max_size: 209715200
         base_filename: thisisoverwritten'
-        
+
 dependency 'puppetlabs/hiera', '>=0.0.1'
 dependency 'puppetlabs/hiera-puppet', '>=0.0.1'
