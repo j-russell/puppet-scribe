@@ -117,7 +117,10 @@
 #
 # Josh Russell <josh.russell@jumptap.com>
 #
-class scribe (
+class scribe {
+
+  include scribe::data
+
   $package                   = $scribe::data::package,
   $service                   = $scribe::data::service,
   $conf_dir                  = $scribe::data::conf_dir,
@@ -129,9 +132,6 @@ class scribe (
   $new_thread_per_category   = $scribe::data::new_thread_per_category,
   $num_thrift_server_threads = $scribe::data::num_thrift_server_threads,
   $stores                    = $scribe::data::stores,
-) {
-
-  include scribe::data
 
   package { $scribe::data::package:
     ensure => installed,
